@@ -1,2 +1,2 @@
 # ekinox
-Back to the Future glorified calculator application
+Back to the Future themed cashout register

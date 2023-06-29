@@ -10,14 +10,11 @@ const (
 	otherMoviePrice      = 20
 )
 
-// Movie represents a movie with its name and price
 type Movie struct {
-	Name   string
-	Price  float64
-	Copies int
+	Name  string
+	Price float64
 }
 
-// ProcessMovies processes the content and returns a list of movies, along with the count of distinct series movies
 func ProcessMovies(content string) ([]*Movie, int) {
 	rawlines := strings.Split(content, "\n")
 
@@ -30,16 +27,16 @@ func ProcessMovies(content string) ([]*Movie, int) {
 		}
 	}
 
-	distinctMovies := make(map[string]*Movie)
-	seriesCount := 0
-	encounteredMovies := make(map[string]bool)
 	movies := make(map[int]*Movie)
+	distinctMovies := make(map[string]*Movie)
+	encounteredMovies := make(map[string]bool)
+
+	seriesCount := 0
 	moviesCounter := 0
 
 	for _, line := range lines {
 		line = strings.TrimSpace(line)
 		if strings.Contains(line, "Back to the Future") {
-			// fmt.Printf("Movie: %s, Encountered: %v\n", line, encounteredMovies[line])
 			if !encounteredMovies[line] {
 				encounteredMovies[line] = true
 				distinctMovies[line] = &Movie{Name: line, Price: backToTheFuturePrice}

@@ -5,9 +5,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	// "ekinox/fileutil"
+	"os"
 
-	"ekinox/movieutil"
+	"ekinox/functions/movieutil"
 )
 
 func main() {
@@ -15,22 +15,25 @@ func main() {
 	// Initialize the Gin router
 	router := gin.Default()
 
+	router.Static("/favicon.ico", "./favicon.ico")
+	router.Static("/styles", "./styles")
+	router.Static("/images", "./images")
+	router.Static("/javascript", "./javascript")
+	router.LoadHTMLGlob("templates/*")
 	// Define the route for the home page
 	router.GET("/", homePageHandler)
 
 	// Define the route for the form submission
 	router.POST("/calculate", calculateHandler)
 
+	port := os.Getenv("PORT")
 	// Run the server
-	router.Run(":8080")
 
-	// // Read the file
-	// filePath := "panier.txt" // Replace with the actual file path
-	// content, err := fileutil.ReadFile(filePath)
-	// if err != nil {
-	// 	log.Fatalf("Error reading file: %s", err)
-	// }
+	if port == "" {
+		port = "8080"
+	}
 
+	router.Run(":" + port)
 	// // Process the file
 	// movies, seriesCount := movieutil.ProcessMovies(content)
 
@@ -48,17 +51,17 @@ func homePageHandler(c *gin.Context) {
 
 func calculateHandler(c *gin.Context) {
 	// Get the list of movies from the form submission
-	movies := c.PostForm("movies")
+	movies := c.PostForm("userinput")
 
 	// Process the movies and calculate the price
 	movieList, seriesCount := movieutil.ProcessMovies(movies)
-	movieutil.CalculateMoviePrices(movieList, seriesCount)
+	// movieutil.CalculateMoviePrices(movieList, seriesCount)
 
 	// Calculate the total price
-	totalPrice := 0.0
-	for _, movie := range movieList {
-		totalPrice += movie.Price
-	}
+	totalPrice := movieutil.CalculateMoviePrices(movieList, seriesCount)
+	// for _, movie := range movieList {
+	// 	totalPrice += movie.Price
+	// }
 
 	// Return the result to the user
 	c.JSON(http.StatusOK, gin.H{

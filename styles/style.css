@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('../images/delorean.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+/* classes */
+.button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/*IDs*/
+#userForm {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+}
+
+#userinput {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    min-height: 150px;
+    resize: vertical;
+}
+
+#submit:hover {
+    background-color: #0056b3;
+}
+
+#result {
+    background: #eee;
+    padding: 10px;
+    border-radius: 4px;
+    height: 40px;
+}
+

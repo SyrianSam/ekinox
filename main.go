@@ -26,22 +26,15 @@ func main() {
 	// Define the route for the form submission
 	router.POST("/calculate", calculateHandler)
 
+	// get port dynamically for railway
 	port := os.Getenv("PORT")
-	// Run the server
 
+	//local configuration
 	if port == "" {
 		port = "8080"
 	}
 
 	router.Run(":" + port)
-	// // Process the file
-	// movies, seriesCount := movieutil.ProcessMovies(content)
-
-	// // Calculate the final price for each movie
-	// fmt.Println(movieutil.CalculateMoviePrices(movies, seriesCount))
-	// // movieutil.PrintTotalPrice(movies)
-	// // Print the result
-	// // movieutil.PrintMovies(movies)
 }
 
 func homePageHandler(c *gin.Context) {
@@ -53,15 +46,11 @@ func calculateHandler(c *gin.Context) {
 	// Get the list of movies from the form submission
 	movies := c.PostForm("userinput")
 
-	// Process the movies and calculate the price
+	// Process the movies
 	movieList, seriesCount := movieutil.ProcessMovies(movies)
-	// movieutil.CalculateMoviePrices(movieList, seriesCount)
 
 	// Calculate the total price
 	totalPrice := movieutil.CalculateMoviePrices(movieList, seriesCount)
-	// for _, movie := range movieList {
-	// 	totalPrice += movie.Price
-	// }
 
 	// Return the result to the user
 	c.JSON(http.StatusOK, gin.H{

@@ -87,9 +87,6 @@ func CalculateMoviePrices(movies []*Movie, seriesCount int) float64 {
 	totalPrice := 0.0
 	for _, movie := range movies {
 		if strings.Contains(movie.Name, "Back to the Future") {
-			// fmt.Println(movie.Price)
-			// fmt.Println(float64(movie.Price))
-			fmt.Println(float64(movie.Price) * (1 - priceReduction))
 			reducedPrice := float64(movie.Price) * (1 - priceReduction)
 			totalPrice += reducedPrice
 			movie.Price = reducedPrice
@@ -107,8 +104,6 @@ func PrintTotalPrice(movies []*Movie) {
 	for _, movie := range movies {
 		totalPrice += movie.Price
 	}
-
-	fmt.Printf("Total Price: %.2f\n", totalPrice)
 }
 
 // PrintMovies prints the movie names and prices

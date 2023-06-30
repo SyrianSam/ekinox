@@ -22,6 +22,11 @@ body {
     text-transform: uppercase;
 }
 
+.button-disabled {
+    background-color: #ddd;
+    color: #888;
+    cursor: not-allowed;
+  }
 /*IDs*/
 #userForm {
     background: #fff;

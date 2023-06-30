@@ -14,4 +14,7 @@ $("#generate").click(function() {
     }
   
     $("#userinput").html(html);
+    $("#generate").prop("disabled", true);
+    $("#generate").addClass("button-disabled");
+
   });
